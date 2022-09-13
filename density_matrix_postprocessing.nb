@@ -1,0 +1,1520 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     75249,       1512]
+NotebookOptionsPosition[     71012,       1434]
+NotebookOutlinePosition[     71418,       1450]
+CellTagsIndexPosition[     71375,       1447]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Density matrix reconstruction", "Title",
+ CellChangeTimes->{{3.8720616561499095`*^9, 
+  3.8720616642472525`*^9}},ExpressionUUID->"84be43b3-052b-4f92-b62f-\
+e00e25e67516"],
+
+Cell["\<\
+Density matrix reconstruction based on Maximum Likelihood Estimation (MLE)\
+\>", "Subtitle",
+ CellChangeTimes->{{3.7343434561278453`*^9, 3.7343434972521973`*^9}, 
+   3.7444497985695295`*^9},
+ FontSize->24,ExpressionUUID->"246f57b9-95f7-433d-a943-5bdf398851ec"],
+
+Cell[CellGroupData[{
+
+Cell["Get data", "Chapter",
+ CellChangeTimes->{{3.725274095026238*^9, 3.725274106520895*^9}, {
+   3.72535084933435*^9, 3.7253508510434475`*^9}, 3.779876989456549*^9, {
+   3.779877316961905*^9, 3.779877319367626*^9}, {3.7798805461204095`*^9, 
+   3.779880547800769*^9}, 3.779880820192379*^9, 
+   3.7798830716871853`*^9},ExpressionUUID->"b7eecaa5-0bcc-447b-9a79-\
+eaf029ad0cc4"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"SetDirectory", "[", 
+  RowBox[{"NotebookDirectory", "[", "]"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "mle.wl"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"files", "=", 
+   RowBox[{"FileNames", "[", "\"\<*.txt\>\"", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"MapIndexed", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Labeled", "[", 
+      RowBox[{"#1", ",", 
+       RowBox[{
+        RowBox[{"ToString", "[", 
+         RowBox[{"First", "@", "#2"}], "]"}], "<>", "\"\<) \>\""}], ",", 
+       "Left"}], "]"}], "&"}], ",", "files"}], "]"}], "//", 
+  "Column"}]}], "Input",
+ CellChangeTimes->{{3.731132021082881*^9, 3.731132024829095*^9}, {
+   3.731237730306319*^9, 3.731237731454385*^9}, 3.734241649773457*^9, 
+   3.7440079662242813`*^9, {3.744008206803042*^9, 3.7440082674465103`*^9}, {
+   3.7543815775804763`*^9, 3.754381577851492*^9}, {3.779878892523572*^9, 
+   3.779878900913475*^9}, {3.7798790267404213`*^9, 3.7798790367471037`*^9}, {
+   3.872060683341563*^9, 3.8720606940074077`*^9}, {3.8720613882503023`*^9, 
+   3.8720614096423855`*^9}, {3.87206153732917*^9, 3.872061538799906*^9}, {
+   3.872061687423766*^9, 3.872061687671951*^9}, {3.872061883702472*^9, 
+   3.872061886864352*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"6d343e18-926a-4339-962e-ce3fb147ee8a"],
+
+Cell[BoxData["\<\"C:\\\\Users\\\\Jaroslav Kysela\\\\Dropbox\\\\PhD \
+studies\\\\nova prace\\\\wolfram appl\\\\code samples\\\\processing MLE of \
+tomography data\"\>"], "Output",
+ CellChangeTimes->{{3.8720606671058273`*^9, 3.8720606945499525`*^9}, 
+   3.8720614485058784`*^9, 3.8720615779169583`*^9, 3.8720618890596523`*^9, 
+   3.8720620084025583`*^9, 3.8720620403793178`*^9},
+ CellLabel->"Out[1]=",ExpressionUUID->"5a22f449-e25c-4962-88cd-bc1bf1ea92c8"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     TemplateBox[{"\"test_file_mle.txt\"", "\"1) \""},
+      "Labeled",
+      DisplayFunction->(GridBox[{{
+          ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"], 
+          TagBox[
+           ItemBox[
+            PaneBox[
+             TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline},
+              BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+           "SkipImageSizeLevel"]}}, 
+        GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+        AutoDelete -> False, 
+        GridBoxItemSize -> {
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+        BaselinePosition -> {1, 2}]& ),
+      InterpretationFunction->(RowBox[{"Labeled", "[", 
+         RowBox[{#, ",", #2, ",", "Left", ",", 
+           RowBox[{"{", "}"}]}], "]"}]& )]}
+   },
+   DefaultBaseStyle->"Column",
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Column"]], "Output",
+ CellChangeTimes->{{3.8720606671058273`*^9, 3.8720606945499525`*^9}, 
+   3.8720614485058784`*^9, 3.8720615779169583`*^9, 3.8720618890596523`*^9, 
+   3.8720620084025583`*^9, 3.8720620404653234`*^9},
+ CellLabel->"Out[4]=",ExpressionUUID->"75be414d-54ed-4ab0-b489-88ad989c977c"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Process data", "Chapter",
+ CellChangeTimes->{{3.7798883040747175`*^9, 
+  3.779888305515444*^9}},ExpressionUUID->"09623919-107c-4890-9de4-\
+edaf4451acb0"],
+
+Cell[CellGroupData[{
+
+Cell["Reconstruct density matrices", "Subchapter",
+ CellChangeTimes->{
+  3.779889035676764*^9},ExpressionUUID->"c5dc5782-0953-4920-81d4-\
+01a12c19943f"],
+
+Cell["Reconstruct density matrices from the data:", "Text",
+ CellChangeTimes->{{3.779881476324813*^9, 
+  3.7798814885730033`*^9}},ExpressionUUID->"34d56842-2295-4e20-a3b2-\
+51609ea95cb7"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"data", "=", 
+   RowBox[{"fullReconstructMatrixMLE", "/@", "files"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"matrices", ",", "diags", ",", "offdiags"}], "}"}], "=", 
+   RowBox[{"Transpose", "[", "data", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.7798780067407246`*^9, 3.7798780162360244`*^9}, {
+  3.779881752497103*^9, 3.779881774820794*^9}},
+ CellLabel->"In[5]:=",ExpressionUUID->"c71f8d76-c49d-42c5-8b4d-c8aaec55780d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Maximize overlap with pure state", "Subchapter",
+ CellChangeTimes->{{3.7798890431836853`*^9, 
+  3.779889049510971*^9}},ExpressionUUID->"4312de00-139e-4ec0-bd8d-\
+d5d3a78e6e02"],
+
+Cell["\<\
+Find pure states that maximize the overlap with reconstructed density \
+matrices:\
+\>", "Text",
+ CellChangeTimes->{{3.779881492765791*^9, 
+  3.7798815106459656`*^9}},ExpressionUUID->"57f06eb5-f350-4643-969b-\
+6c9cc28ed01f"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"optimStates", "=", 
+   RowBox[{"fullPureStateOptimization", "/@", "matrices"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"maxOverlapStates", "=", 
+   RowBox[{"getMaximizedOverlapState", "/@", "optimStates"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.7798800660187483`*^9, 3.779880070307416*^9}, {
+   3.77988026278629*^9, 3.779880272445281*^9}, 3.7801397630453525`*^9},
+ CellLabel->"In[7]:=",ExpressionUUID->"4edf0896-3bd2-467c-87d6-0309c13ec98a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"optimStatesDiag", "=", 
+   RowBox[{"fullPureStateOptimizationDiag", "/@", "matrices"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"maxOverlapStatesDiag", "=", 
+   RowBox[{"getMaximizedOverlapState", "/@", "optimStatesDiag"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.7798800660187483`*^9, 3.779880070307416*^9}, {
+   3.77988026278629*^9, 3.779880272445281*^9}, 3.7801397630453525`*^9, {
+   3.7801404195016804`*^9, 3.7801404274903555`*^9}, {3.7801407637225184`*^9, 
+   3.7801407663844*^9}, {3.7801408217673206`*^9, 3.7801408224225307`*^9}, 
+   3.7801409620002823`*^9},
+ CellLabel->"In[9]:=",ExpressionUUID->"77cfe278-9e24-4eed-98d5-4ad9b586f052"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"Save", "[", 
+   RowBox[{"\"\<optimStates.txt\>\"", ",", "optimStates"}], "]"}], 
+  "*)"}]], "Input",
+ CellChangeTimes->{{3.7806368023713436`*^9, 3.7806368107349453`*^9}},
+ CellLabel->
+  "In[160]:=",ExpressionUUID->"1591aedf-af38-4ef5-90a7-50f952b93290"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"Save", "[", 
+   RowBox[{"\"\<optimStatesDiag.txt\>\"", ",", "optimStatesDiag"}], "]"}], 
+  "*)"}]], "Input",
+ CellChangeTimes->{{3.7806368023713436`*^9, 3.7806368194805517`*^9}},
+ CellLabel->
+  "In[161]:=",ExpressionUUID->"8c2a92f5-9325-49f7-86e1-f241c10af830"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"Save", "[", 
+   RowBox[{"\"\<files.txt\>\"", ",", "files"}], "]"}], "*)"}]], "Input",
+ CellChangeTimes->{{3.780636848758255*^9, 3.7806368597817693`*^9}},
+ CellLabel->
+  "In[162]:=",ExpressionUUID->"11a75a87-d9de-4fe1-84c2-f9deb5ae7e3f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Estimate errors", "Subchapter",
+ CellChangeTimes->{{3.7798890559606524`*^9, 
+  3.7798890571968913`*^9}},ExpressionUUID->"f829221f-4878-40d1-91c3-\
+4a7d82e3f6c8"],
+
+Cell["\<\
+Perform Monte Carlo simulation to estimate errors due to Poisson behavior:\
+\>", "Text",
+ CellChangeTimes->{{3.77988827363325*^9, 
+  3.779888291566399*^9}},ExpressionUUID->"97220565-8f8e-4597-9550-\
+bac16a142ea9"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"numOfGenSamples", "=", "50"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"numOfIterationsMLE", "=", "50"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"indata", "=", 
+    RowBox[{"Transpose", "[", 
+     RowBox[{"{", 
+      RowBox[{"diags", ",", "offdiags"}], "}"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"indata", "=", 
+     RowBox[{"indata", "[", 
+      RowBox[{"[", 
+       RowBox[{";;", "3"}], "]"}], "]"}]}], ";"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"monteCarloDataRaw", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"AbsoluteTiming", "[", 
+      RowBox[{"monteCarloFidelitiesMLE", "[", 
+       RowBox[{"#", ",", "numOfGenSamples", ",", "numOfIterationsMLE"}], 
+       "]"}], "]"}], "&"}], "/@", "indata"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"times", ",", "monteCarloData"}], "}"}], "=", 
+   RowBox[{"Transpose", "[", "monteCarloDataRaw", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"mats", ",", "fids", ",", "sqrtpurs"}], "}"}], "=", 
+   RowBox[{"Transpose", "[", "monteCarloData", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.7798827840033703`*^9, 3.779882835928689*^9}, {
+   3.779882886458881*^9, 3.779882908736455*^9}, {3.77988294069421*^9, 
+   3.7798829617427764`*^9}, {3.77988300714572*^9, 3.77988301335765*^9}, {
+   3.7798831053499374`*^9, 3.779883133212695*^9}, 3.779883168479132*^9, {
+   3.779883225560545*^9, 3.7798832598878827`*^9}, {3.779883299538149*^9, 
+   3.7798833192317266`*^9}, {3.779883681146285*^9, 3.779883750621355*^9}, 
+   3.7798881076441507`*^9, {3.779888468977623*^9, 3.7798884753955736`*^9}, 
+   3.7798887519365807`*^9, 3.779889508900922*^9},
+ CellLabel->
+  "In[163]:=",ExpressionUUID->"06e7b001-7caa-478e-8f11-8743c2842bcb"],
+
+Cell["Second round...:", "Text",
+ CellChangeTimes->{{3.7831603048631544`*^9, 
+  3.783160307794672*^9}},ExpressionUUID->"98f4b28f-0988-46d0-8cc4-\
+5320367eac62"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"numOfGenSamples", "=", "150"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"numOfIterationsMLE", "=", "150"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"monteCarloDataRaw", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"AbsoluteTiming", "[", 
+        RowBox[{"monteCarloFidelitiesMLE", "[", 
+         RowBox[{"#", ",", "numOfGenSamples", ",", "numOfIterationsMLE"}], 
+         "]"}], "]"}], "&"}], "/@", 
+      RowBox[{"indata", "[", 
+       RowBox[{"[", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", "4"}], "}"}], "]"}], "]"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"times", ",", "monteCarloData"}], "}"}], "=", 
+     RowBox[{"Transpose", "[", "monteCarloDataRaw", "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"mats", ",", "fids", ",", "sqrtpurs"}], "}"}], "=", 
+     RowBox[{"Transpose", "[", "monteCarloData", "]"}]}], ";"}], "\n", 
+   "times"}], "*)"}]], "Input",
+ CellChangeTimes->{{3.783160206197714*^9, 3.7831602099583206`*^9}, {
+   3.7831602896453505`*^9, 3.78316034416656*^9}, {3.7831646573349395`*^9, 
+   3.7831646600666323`*^9}, 3.783175699933597*^9},
+ CellLabel->
+  "In[249]:=",ExpressionUUID->"8cebdc68-ab28-492e-97a2-3ed31122f160"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"reportErrorEstimates", "[", "fids", "]"}], "*)"}]], "Input",
+ CellLabel->
+  "In[250]:=",ExpressionUUID->"2e2db30a-1919-45e6-b0ac-4391dc1ec071"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Present results", "Chapter",
+ CellChangeTimes->{{3.779881289794669*^9, 
+  3.779881297855924*^9}},ExpressionUUID->"ab4af0ee-3653-4e51-a192-\
+4ffab2db5583"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"reportMaximizedOverlap", "[", 
+  RowBox[{"files", ",", "optimStates"}], "]"}]], "Input",
+ CellChangeTimes->{{3.779880682652763*^9, 3.779880684050728*^9}, {
+   3.779880836882229*^9, 3.779880842946852*^9}, 3.779881121074196*^9, 
+   3.779888938456904*^9},
+ CellLabel->"In[11]:=",ExpressionUUID->"73577c6d-9d63-4af9-a150-990242108ab1"],
+
+Cell[BoxData[
+ TagBox[
+  TagBox[GridBox[{
+     {
+      StyleBox["\[Null]",
+       ShowStringCharacters->False], 
+      TagBox["\<\"fidelity with optim. state\"\>",
+       HoldForm], 
+      TagBox["\<\"\\!\\(\\*SqrtBox[\\(purity\\)]\\)\"\>",
+       HoldForm], 
+      TagBox["\<\"dimension\"\>",
+       HoldForm]},
+     {
+      TagBox["\<\"test_file_mle.txt\"\>",
+       HoldForm], "0.9468421036462366`", "0.947396973792224`", "3"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+    GridBoxDividers->{
+     "Columns" -> {False, True, {False}, False}, 
+      "Rows" -> {False, True, {False}, False}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[2.0999999999999996`]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}],
+   {OutputFormsDump`HeadedRows, OutputFormsDump`HeadedColumns}],
+  Function[BoxForm`e$, 
+   TableForm[
+   BoxForm`e$, 
+    TableHeadings -> {{"test_file_mle.txt"}, {
+      "fidelity with optim. state", "\!\(\*SqrtBox[\(purity\)]\)", 
+       "dimension"}}]]]], "Output",
+ CellChangeTimes->{3.872060714292281*^9, 3.8720615141109905`*^9, 
+  3.87206159041854*^9, 3.872061928565764*^9, 3.872062050144007*^9},
+ CellLabel->
+  "Out[11]//TableForm=",ExpressionUUID->"055ccb18-7ca8-4d41-83a7-\
+57cc605ef1ab"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"reportMaximizedOverlap", "[", 
+  RowBox[{"files", ",", "optimStatesDiag"}], "]"}]], "Input",
+ CellChangeTimes->{{3.779880682652763*^9, 3.779880684050728*^9}, {
+   3.779880836882229*^9, 3.779880842946852*^9}, 3.779881121074196*^9, 
+   3.779888938456904*^9, {3.7801404462272043`*^9, 3.780140448720576*^9}},
+ CellLabel->"In[12]:=",ExpressionUUID->"4cd9afc0-05c2-4bc6-8447-2cd5dcfe7fbd"],
+
+Cell[BoxData[
+ TagBox[
+  TagBox[GridBox[{
+     {
+      StyleBox["\[Null]",
+       ShowStringCharacters->False], 
+      TagBox["\<\"fidelity with optim. state\"\>",
+       HoldForm], 
+      TagBox["\<\"\\!\\(\\*SqrtBox[\\(purity\\)]\\)\"\>",
+       HoldForm], 
+      TagBox["\<\"dimension\"\>",
+       HoldForm]},
+     {
+      TagBox["\<\"test_file_mle.txt\"\>",
+       HoldForm], "0.8754761116434384`", "0.947396973792224`", "3"}
+    },
+    GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+    GridBoxDividers->{
+     "Columns" -> {False, True, {False}, False}, 
+      "Rows" -> {False, True, {False}, False}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[2.0999999999999996`]}, 
+        Offset[0.27999999999999997`]}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}}],
+   {OutputFormsDump`HeadedRows, OutputFormsDump`HeadedColumns}],
+  Function[BoxForm`e$, 
+   TableForm[
+   BoxForm`e$, 
+    TableHeadings -> {{"test_file_mle.txt"}, {
+      "fidelity with optim. state", "\!\(\*SqrtBox[\(purity\)]\)", 
+       "dimension"}}]]]], "Output",
+ CellChangeTimes->{3.872060717836224*^9, 3.8720615155773153`*^9, 
+  3.8720615922340384`*^9, 3.8720620520898647`*^9},
+ CellLabel->
+  "Out[12]//TableForm=",ExpressionUUID->"56d0db51-699f-4f59-acf3-\
+fe35f2927c49"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"reportState", "/@", "matrices"}]], "Input",
+ CellChangeTimes->{{3.779878091455965*^9, 3.779878093448902*^9}},
+ CellLabel->"In[13]:=",ExpressionUUID->"007fe7f5-9977-41cc-a906-101cd0aa007a"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  TagBox[
+   TagBox[
+    DynamicModuleBox[{TypeSystem`NestedGrid`PackagePrivate`$state$$ = <|
+     "InitialData" -> <|
+       "positive semidef. mat" -> True, "purity" -> 0.8975610259506639, 
+        "\!\(\*SqrtBox[\(purity\)]\)" -> 0.947396973792224, "plot Re" -> 
+        Graphics[
+          Raster[CompressedData["
+1:eJx1VXk01VsbPlKGbrFuaZBzcVFq1VdHpRJ9j0pS5gzdhFs0SFEyNaABdQ0N
+ClFIk0IIdVGSNBkqpHPiOI75jL/9O11DqSu+3/et+++313rX2nut993D8z7P
+s3/1ObhltzKLxVL/J/4796ueYlKwlcZAuI927xkCg+1hmmXvpKg10XH8HkCj
+LLDAZ347QUROobr0ngzt2wy+uZYShK0qV+rUlmNo3RmDPVG9WHpw+vHLMTTO
+NL7QPMehwQ06Hq9yVo7R1qaqtw1MvVorxzVMDsFcdkVvYB+8VznXiK7SmB3B
+zZYydYHKadNCfSisMra46WxFMGlq342dYVKY1Oaujg8TInrGibVqljTOdlzL
+iP8Xgf+C8mfO/RJYOi0tHGTOc+yIjjw/ROGd8FLdbGcJNnPfxL7WoOF0YeP9
+fcEUAtt3VC9WEqMn/a+HPHOCmoWq69zdpSj64S3gNXZgIMfL79APCvGHrKqJ
+tQQO7At1R9LakHHn6msuj8IHmf8LnSwxdiTc+HKM9Qn3T2o2h1AUMpobOLmj
+YlQ0G373CmlFXP+mgzN2E1yXpn3jDEixf5Qf6BjZhd15T3ze3qSQI8y9m/BY
+BN5Khf3hUy1YGaBoW5hGYfnH9/7TEkXwVhcM36v/AI14pfE7q2jYmwW9v/Uz
+gVOobUlVhgQNtROieNsJLpYfkVg2SpH1WGB00KALHPsDK3LfyNDlVrOvXJfg
+bVWYbNiORjrnxWTRagVq29oGhH4CvIyLWLYl2wWz2Kbbk5h9Q/FwzVCWBLoH
+xuqLBvgwVzFfrzCiEaFRHP9LkhBdKfOUh3P2InC5Wb6tDY0HptkrXtoRVBtX
+NsStkIL1v/EZ3ce0Cjd28/9Zs1gjTlGZ9/MpxDis3ePZLUL09T/fsOd8REFJ
+RV+pLYFlscYhm0sMPpxotweqnTg8+l63KYrG1pV9Rp6rFGAXBrKOJCqwKNnc
+K/w2ge6GD6kl3TLUfvwUsInqwS73pUF2eXKYutzltWQRuOYaXZyVTsNPs/XJ
+YChBXM2eMtpEhqRtrE06ht0oCom8ejuUxsZnFrv0RghmFWXpWA7JkF14a5L0
+HIF1zUduWKIMqt7W3qkaPeh99icpcKQhb6ufmO9H0NE+v419Qvp/+yu933Ii
+5jIN4ae8DxP20XB1XDipR5uCTZbdNjsewfm/vgyOZ8px5vmByum8PnxbM5Ia
+yqXwfl9ZHtlI4xw/vDnlB40pTbV6Xk0EeuHpcgOzTriE3PVqF+zHzBddO/Vj
+GV0Iu99t2C/DO+WcdsvybjSw69RcPAnUMzZX8DS7oD97JEbefAhGrL8FKpE0
+TvnuXaqiRcPE96cFLRZy+PAtJG4WNIpFHreu+wiRnWLILo3YA22+XWpyL4XK
+ncsPt3LFUPX3PFna/gln7V0i/F8SrNtV4BPgIUdNUFG+07w+6AstI+xn0ZBd
+NDh78zIF9crBJ2OuYlxcsFh/JoPvF3qxRcEvFCJuD44sMhAhvUin9LuEQEVJ
+ffWVPjma51sVPDjXj9bgf6uFPqXA6j7xQH+JGHHsp9e+23JxY6WvXlUkQYNZ
+2bi3owwljmbvCw52YzDa42hSIIGDroVUdaYMIXcum//B70JezdeUoDkMD4ps
+R1++kqC+5ZWVR0I71MY/JQy/ozBwrGWibbgYhYb8iKa9PNz9fvHpcAKN6mC6
+I5jRiWKu5Ep6oxxeNlpjEzMJUo0yRedfMXraUKs8+1YPhjZWyoztZDjj0fxQ
+0sr4ydFK/aOGNJbLKuc/+kYjtjHygq9MAKOxYgcdXQ9omKcPe35meH5nmVoU
+i4Jc8ODxel4/TG/Xv3whJtjiuH7incmd+BF8Oyy9xB+pydz+uZMprNxfcE+J
+SzCw9Al7cwWNIM/nu08YKnBJicP3vCKAVfxpJd6QG2Lt9W85qRD4dbVHVQVI
+8He0+3pDEz6c+q+blz0mKBb0NL4ylWPa14El3173ImCLZk11AUFatWgDp4bG
+14rnijXWCjzSatCKMSQYC0hMDCIS+FWNOe82FqBGXTvMgZIiZl1Dz2PGt5oU
+c5OtlWlMepTvc2ScgHN52+RkMwqpv+1QqfYXoXbc1SAjlPFf5+LWZz8zeDp1
+W/l20MjWq7jelk/wm3R0V/oPGXr/sDouWN4LnwTN/NPGcvQE1JqLXBk/t5ka
+Pp/5b5LaUwrDlhE0vZpmvWSZFFuf/m5TYtYBl5zMKWl7aETWn05e+4xg58Da
+UbcdMvC1+zo/G9Pg56nmnfpAwXm6xaWzI2KYax2wF9szfbzXFTwhkcY2zkLf
+n+YpIKlMfXIzhWD7ycOz7+XK8Dpp+5cYjx4k76uqKtKlYWRq7xZXRMHw0I66
+pEwxKhfUXyvsIKhN+bVGVCFHdmhbXY5uPyyrFuZ9YfLd9YRbFk9QIMqoNXjD
+AQXc18SahzDvcdNymONRKoXa1K7F5aWd4G7avH6XKo0Zcrbw9FbmnsZDJdfK
+RRDYxgdr/k5jEfucuO4mgYVmL3szw+v/ABm291c=
+           "], {{0, 0}, {9, 9}}, {0, 1}], Frame -> True, 
+          FrameLabel -> {None, None}, 
+          FrameTicks -> {{{{8.5, 1}, {7.5, 2}, {6.5, 3}, {5.5, 4}, {4.5, 5}, {
+              3.5, 6}, {2.5, 7}, {1.5, 8}, {0.5, 9}}, {{8.5, 1}, {7.5, 2}, {
+              6.5, 3}, {5.5, 4}, {4.5, 5}, {3.5, 6}, {2.5, 7}, {1.5, 8}, {
+              0.5, 9}}}, {{{0.5, 1}, {1.5, 2}, {2.5, 3}, {3.5, 4}, {4.5, 5}, {
+              5.5, 6}, {6.5, 7}, {7.5, 8}, {8.5, 9}}, {{0.5, 1}, {1.5, 2}, {
+              2.5, 3}, {3.5, 4}, {4.5, 5}, {5.5, 6}, {6.5, 7}, {7.5, 8}, {
+              8.5, 9}}}}, GridLinesStyle -> Directive[
+            GrayLevel[0.5, 0.4]], ImageSize -> Automatic, 
+          Method -> {
+           "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic,
+             "DefaultGraphicsInteraction" -> {
+             "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+              "Effects" -> {
+               "Highlight" -> {"ratio" -> 2}, 
+                "HighlightPoint" -> {"ratio" -> 2}, 
+                "Droplines" -> {
+                 "freeformCursorMode" -> True, 
+                  "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+            "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+            "RangePadding" -> Scaled[0.05]}], "plot abs" -> Graphics[
+          Raster[CompressedData["
+1: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
+           "], {{0, 0}, {9, 9}}, {0, 1}], Frame -> True, 
+          FrameLabel -> {None, None}, 
+          FrameTicks -> {{{{8.5, 1}, {7.5, 2}, {6.5, 3}, {5.5, 4}, {4.5, 5}, {
+              3.5, 6}, {2.5, 7}, {1.5, 8}, {0.5, 9}}, {{8.5, 1}, {7.5, 2}, {
+              6.5, 3}, {5.5, 4}, {4.5, 5}, {3.5, 6}, {2.5, 7}, {1.5, 8}, {
+              0.5, 9}}}, {{{0.5, 1}, {1.5, 2}, {2.5, 3}, {3.5, 4}, {4.5, 5}, {
+              5.5, 6}, {6.5, 7}, {7.5, 8}, {8.5, 9}}, {{0.5, 1}, {1.5, 2}, {
+              2.5, 3}, {3.5, 4}, {4.5, 5}, {5.5, 6}, {6.5, 7}, {7.5, 8}, {
+              8.5, 9}}}}, GridLinesStyle -> Directive[
+            GrayLevel[0.5, 0.4]], ImageSize -> Automatic, 
+          Method -> {
+           "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> Automatic,
+             "DefaultGraphicsInteraction" -> {
+             "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+              "Effects" -> {
+               "Highlight" -> {"ratio" -> 2}, 
+                "HighlightPoint" -> {"ratio" -> 2}, 
+                "Droplines" -> {
+                 "freeformCursorMode" -> True, 
+                  "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+            "DefaultPlotStyle" -> Automatic, "DomainPadding" -> Scaled[0.02], 
+            "RangePadding" -> Scaled[0.05]}]|>, "AllowEmbedding" -> True, 
+      "InitialShape" -> 
+      TypeSystem`PackageScope`DocumentShape[<|{"positive semidef. mat"} -> 
+         TypeSystem`PackageScope`AtomShape[36], {"purity"} -> 
+         TypeSystem`PackageScope`AtomShape[60], {
+          "\!\(\*SqrtBox[\(purity\)]\)"} -> 
+         TypeSystem`PackageScope`AtomShape[60], {"plot Re"} -> 
+         TypeSystem`PackageScope`AtomShape[60], {"plot abs"} -> 
+         TypeSystem`PackageScope`AtomShape[60]|>, 1], "InitialType" -> 
+      TypeSystem`Struct[{
+        "positive semidef. mat", "purity", "\!\(\*SqrtBox[\(purity\)]\)", 
+         "plot Re", "plot abs"}, {
+         TypeSystem`Atom[TypeSystem`Boolean], 
+         TypeSystem`Atom[Real], 
+         TypeSystem`Atom[Real], 
+         TypeSystem`Atom[Graphics], 
+         TypeSystem`Atom[Graphics]}], "Meta" -> <||>, "RowTarget" -> 20, 
+      "ColumnTarget" -> 10, "Shape" -> 
+      TypeSystem`PackageScope`DocumentShape[<|{"positive semidef. mat"} -> 
+         TypeSystem`PackageScope`AtomShape[36], {"purity"} -> 
+         TypeSystem`PackageScope`AtomShape[60], {
+          "\!\(\*SqrtBox[\(purity\)]\)"} -> 
+         TypeSystem`PackageScope`AtomShape[60], {"plot Re"} -> 
+         TypeSystem`PackageScope`AtomShape[60], {"plot abs"} -> 
+         TypeSystem`PackageScope`AtomShape[60]|>, 1], "Type" -> 
+      TypeSystem`Struct[{
+        "positive semidef. mat", "purity", "\!\(\*SqrtBox[\(purity\)]\)", 
+         "plot Re", "plot abs"}, {
+         TypeSystem`Atom[TypeSystem`Boolean], 
+         TypeSystem`Atom[Real], 
+         TypeSystem`Atom[Real], 
+         TypeSystem`Atom[Graphics], 
+         TypeSystem`Atom[Graphics]}], "Path" -> {}, "DisplayedRowCount" -> 20,
+       "DisplayedColumnCount" -> 10, "DataRowCount" -> 5, "DataColumnCount" -> 
+      1, "SortPaths" -> {}, "SortDirections" -> {}, "HiddenItemsMap" -> Null, 
+      "UpdateType" -> 1|>, TypeSystem`NestedGrid`PackagePrivate`$outputID$$, 
+     TypeSystem`NestedGrid`PackagePrivate`$path$$ = {}, 
+     TypeSystem`NestedGrid`PackagePrivate`$vPos$$ = 1, 
+     TypeSystem`NestedGrid`PackagePrivate`$hPos$$ = 1, 
+     TypeSystem`NestedGrid`PackagePrivate`$grid$$ = 
+     DynamicModule[{TypeSystem`NestedGrid`PackagePrivate`renderedGrid = Deploy[
+         Style[
+          Grid[{{
+             Item[
+              Pane[
+               Annotation[
+                EventHandler[
+                 MouseAppearance[
+                  Mouseover["positive semidef. mat", 
+                   Style[
+                   "positive semidef. mat", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                 If[
+                   TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
+                   TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                   TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
+                    Key["positive semidef. mat"]}, 1]]], 
+                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                 TypeSystem`NestedGrid`PackagePrivate`localHold[
+                 TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
+                  Key["positive semidef. mat"]}, "RowHeader", False], 
+                "Mouse"], ImageSize -> {{1, Full}, Automatic}, 
+               ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
+              GrayLevel[0.95], Alignment -> {Left, Baseline}], 
+             Item[
+              Pane[
+               Annotation[
+                RawBoxes["True"], 
+                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                 TypeSystem`NestedGrid`PackagePrivate`localHold[
+                 TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
+                  Key["positive semidef. mat"]}, "Item", False], "Mouse"], 
+               ImageSize -> {{36, Full}, Automatic}, 
+               ImageMargins -> {{5, 3}, {4, 5}}], 
+              ItemSize -> {Full, Automatic}]}, {
+             Item[
+              Pane[
+               Annotation[
+                EventHandler[
+                 MouseAppearance[
+                  Mouseover["purity", 
+                   Style[
+                   "purity", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                 If[
+                   TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
+                   TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                   TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
+                    Key["purity"]}, 1]]], 
+                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                 TypeSystem`NestedGrid`PackagePrivate`localHold[
+                 TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
+                  Key["purity"]}, "RowHeader", False], "Mouse"], 
+               ImageSize -> {{1, Full}, Automatic}, 
+               ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
+              GrayLevel[0.95], Alignment -> {Left, Baseline}], 
+             Item[
+              Pane[
+               Annotation[
+                RawBoxes["0.897561"], 
+                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                 TypeSystem`NestedGrid`PackagePrivate`localHold[
+                 TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
+                  Key["purity"]}, "Item", False], "Mouse"], 
+               ImageSize -> {{60, Full}, Automatic}, 
+               ImageMargins -> {{5, 3}, {4, 5}}], 
+              ItemSize -> {Full, Automatic}]}, {
+             Item[
+              Pane[
+               Annotation[
+                EventHandler[
+                 MouseAppearance[
+                  Mouseover["\!\(\*SqrtBox[\(purity\)]\)", 
+                   Style[
+                   "\!\(\*SqrtBox[\(purity\)]\)", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                 If[
+                   TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
+                   TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                   TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
+                    Key["\!\(\*SqrtBox[\(purity\)]\)"]}, 1]]], 
+                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                 TypeSystem`NestedGrid`PackagePrivate`localHold[
+                 TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
+                  Key["\!\(\*SqrtBox[\(purity\)]\)"]}, "RowHeader", False], 
+                "Mouse"], ImageSize -> {{1, Full}, Automatic}, 
+               ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
+              GrayLevel[0.95], Alignment -> {Left, Baseline}], 
+             Item[
+              Pane[
+               Annotation[
+                RawBoxes["0.947397"], 
+                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                 TypeSystem`NestedGrid`PackagePrivate`localHold[
+                 TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
+                  Key["\!\(\*SqrtBox[\(purity\)]\)"]}, "Item", False], 
+                "Mouse"], ImageSize -> {{60, Full}, Automatic}, 
+               ImageMargins -> {{5, 3}, {4, 5}}], 
+              ItemSize -> {Full, Automatic}]}, {
+             Item[
+              Pane[
+               Annotation[
+                EventHandler[
+                 MouseAppearance[
+                  Mouseover["plot Re", 
+                   Style[
+                   "plot Re", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                 If[
+                   TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
+                   TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                   TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
+                    Key["plot Re"]}, 1]]], 
+                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                 TypeSystem`NestedGrid`PackagePrivate`localHold[
+                 TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
+                  Key["plot Re"]}, "RowHeader", False], "Mouse"], 
+               ImageSize -> {{1, Full}, Automatic}, 
+               ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
+              GrayLevel[0.95], Alignment -> {Left, Baseline}], 
+             Item[
+              Pane[
+               Annotation[
+                RawBoxes[
+                 GraphicsBox[
+                  RasterBox[CompressedData["
+1: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
+                   "], {{0, 0}, {9, 9}}, {0, 1}], {
+                  PlotRangeClipping -> True, Frame -> True, FrameStyle -> 
+                   GrayLevel[0.85], Ticks -> None, FrameTicks -> None, Axes -> 
+                   None, ImageSize -> 112, Frame -> True, 
+                   FrameLabel -> {None, None}, FrameTicks -> {{{{8.5, 
+                    FormBox["1", TraditionalForm]}, {7.5, 
+                    FormBox["2", TraditionalForm]}, {6.5, 
+                    FormBox["3", TraditionalForm]}, {5.5, 
+                    FormBox["4", TraditionalForm]}, {4.5, 
+                    FormBox["5", TraditionalForm]}, {3.5, 
+                    FormBox["6", TraditionalForm]}, {2.5, 
+                    FormBox["7", TraditionalForm]}, {1.5, 
+                    FormBox["8", TraditionalForm]}, {0.5, 
+                    FormBox["9", TraditionalForm]}}, {{8.5, 
+                    FormBox["1", TraditionalForm]}, {7.5, 
+                    FormBox["2", TraditionalForm]}, {6.5, 
+                    FormBox["3", TraditionalForm]}, {5.5, 
+                    FormBox["4", TraditionalForm]}, {4.5, 
+                    FormBox["5", TraditionalForm]}, {3.5, 
+                    FormBox["6", TraditionalForm]}, {2.5, 
+                    FormBox["7", TraditionalForm]}, {1.5, 
+                    FormBox["8", TraditionalForm]}, {0.5, 
+                    FormBox["9", TraditionalForm]}}}, {{{0.5, 
+                    FormBox["1", TraditionalForm]}, {1.5, 
+                    FormBox["2", TraditionalForm]}, {2.5, 
+                    FormBox["3", TraditionalForm]}, {3.5, 
+                    FormBox["4", TraditionalForm]}, {4.5, 
+                    FormBox["5", TraditionalForm]}, {5.5, 
+                    FormBox["6", TraditionalForm]}, {6.5, 
+                    FormBox["7", TraditionalForm]}, {7.5, 
+                    FormBox["8", TraditionalForm]}, {8.5, 
+                    FormBox["9", TraditionalForm]}}, {{0.5, 
+                    FormBox["1", TraditionalForm]}, {1.5, 
+                    FormBox["2", TraditionalForm]}, {2.5, 
+                    FormBox["3", TraditionalForm]}, {3.5, 
+                    FormBox["4", TraditionalForm]}, {4.5, 
+                    FormBox["5", TraditionalForm]}, {5.5, 
+                    FormBox["6", TraditionalForm]}, {6.5, 
+                    FormBox["7", TraditionalForm]}, {7.5, 
+                    FormBox["8", TraditionalForm]}, {8.5, 
+                    FormBox["9", TraditionalForm]}}}}, GridLinesStyle -> 
+                   Directive[
+                    GrayLevel[0.5, 0.4]], ImageSize -> Automatic, 
+                   Method -> {
+                    "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
+                    Automatic, 
+                    "DefaultGraphicsInteraction" -> {
+                    "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+                    "Effects" -> {
+                    "Highlight" -> {"ratio" -> 2}, 
+                    "HighlightPoint" -> {"ratio" -> 2}, 
+                    "Droplines" -> {
+                    "freeformCursorMode" -> True, 
+                    "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+                    "DefaultPlotStyle" -> Automatic, "DomainPadding" -> 
+                    Scaled[0.02], "RangePadding" -> Scaled[0.05]}}]], 
+                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                 TypeSystem`NestedGrid`PackagePrivate`localHold[
+                 TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
+                  Key["plot Re"]}, "Item", False], "Mouse"], 
+               ImageSize -> {{60, Full}, Automatic}, 
+               ImageMargins -> {{5, 3}, {4, 5}}], 
+              ItemSize -> {Full, Automatic}]}, {
+             Item[
+              Pane[
+               Annotation[
+                EventHandler[
+                 MouseAppearance[
+                  Mouseover["plot abs", 
+                   Style[
+                   "plot abs", FontColor -> 
+                    RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                 If[
+                   TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
+                   TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                   TypeSystem`NestedGrid`PackagePrivate`updateState[
+                   TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
+                    Key["plot abs"]}, 1]]], 
+                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                 TypeSystem`NestedGrid`PackagePrivate`localHold[
+                 TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
+                  Key["plot abs"]}, "RowHeader", False], "Mouse"], 
+               ImageSize -> {{1, Full}, Automatic}, 
+               ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
+              GrayLevel[0.95], Alignment -> {Left, Baseline}], 
+             Item[
+              Pane[
+               Annotation[
+                RawBoxes[
+                 GraphicsBox[
+                  RasterBox[CompressedData["
+1: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
+                   "], {{0, 0}, {9, 9}}, {0, 1}], {
+                  PlotRangeClipping -> True, Frame -> True, FrameStyle -> 
+                   GrayLevel[0.85], Ticks -> None, FrameTicks -> None, Axes -> 
+                   None, ImageSize -> 112, Frame -> True, 
+                   FrameLabel -> {None, None}, FrameTicks -> {{{{8.5, 
+                    FormBox["1", TraditionalForm]}, {7.5, 
+                    FormBox["2", TraditionalForm]}, {6.5, 
+                    FormBox["3", TraditionalForm]}, {5.5, 
+                    FormBox["4", TraditionalForm]}, {4.5, 
+                    FormBox["5", TraditionalForm]}, {3.5, 
+                    FormBox["6", TraditionalForm]}, {2.5, 
+                    FormBox["7", TraditionalForm]}, {1.5, 
+                    FormBox["8", TraditionalForm]}, {0.5, 
+                    FormBox["9", TraditionalForm]}}, {{8.5, 
+                    FormBox["1", TraditionalForm]}, {7.5, 
+                    FormBox["2", TraditionalForm]}, {6.5, 
+                    FormBox["3", TraditionalForm]}, {5.5, 
+                    FormBox["4", TraditionalForm]}, {4.5, 
+                    FormBox["5", TraditionalForm]}, {3.5, 
+                    FormBox["6", TraditionalForm]}, {2.5, 
+                    FormBox["7", TraditionalForm]}, {1.5, 
+                    FormBox["8", TraditionalForm]}, {0.5, 
+                    FormBox["9", TraditionalForm]}}}, {{{0.5, 
+                    FormBox["1", TraditionalForm]}, {1.5, 
+                    FormBox["2", TraditionalForm]}, {2.5, 
+                    FormBox["3", TraditionalForm]}, {3.5, 
+                    FormBox["4", TraditionalForm]}, {4.5, 
+                    FormBox["5", TraditionalForm]}, {5.5, 
+                    FormBox["6", TraditionalForm]}, {6.5, 
+                    FormBox["7", TraditionalForm]}, {7.5, 
+                    FormBox["8", TraditionalForm]}, {8.5, 
+                    FormBox["9", TraditionalForm]}}, {{0.5, 
+                    FormBox["1", TraditionalForm]}, {1.5, 
+                    FormBox["2", TraditionalForm]}, {2.5, 
+                    FormBox["3", TraditionalForm]}, {3.5, 
+                    FormBox["4", TraditionalForm]}, {4.5, 
+                    FormBox["5", TraditionalForm]}, {5.5, 
+                    FormBox["6", TraditionalForm]}, {6.5, 
+                    FormBox["7", TraditionalForm]}, {7.5, 
+                    FormBox["8", TraditionalForm]}, {8.5, 
+                    FormBox["9", TraditionalForm]}}}}, GridLinesStyle -> 
+                   Directive[
+                    GrayLevel[0.5, 0.4]], ImageSize -> Automatic, 
+                   Method -> {
+                    "AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
+                    Automatic, 
+                    "DefaultGraphicsInteraction" -> {
+                    "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+                    "Effects" -> {
+                    "Highlight" -> {"ratio" -> 2}, 
+                    "HighlightPoint" -> {"ratio" -> 2}, 
+                    "Droplines" -> {
+                    "freeformCursorMode" -> True, 
+                    "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+                    "DefaultPlotStyle" -> Automatic, "DomainPadding" -> 
+                    Scaled[0.02], "RangePadding" -> Scaled[0.05]}}]], 
+                TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                 TypeSystem`NestedGrid`PackagePrivate`localHold[
+                 TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
+                  Key["plot abs"]}, "Item", False], "Mouse"], 
+               ImageSize -> {{60, Full}, Automatic}, 
+               ImageMargins -> {{5, 3}, {4, 5}}], 
+              ItemSize -> {Full, Automatic}]}}, 
+           BaseStyle -> {
+            ContextMenu -> 
+             Dynamic[TypeSystem`NestedGrid`PackagePrivate`$contextMenuTrigger; 
+               Which[TypeSystem`NestedGrid`PackagePrivate`$lastOutputID =!= 
+                 TypeSystem`NestedGrid`PackagePrivate`localHold[
+                  TypeSystem`NestedGrid`PackagePrivate`$outputID$$], {}, 
+                 TypeSystem`NestedGrid`PackagePrivate`$contextMenuTrigger === 
+                 TypeSystem`NestedGrid`PackagePrivate`$lastContextMenuTrigger,
+                  TypeSystem`NestedGrid`PackagePrivate`$lastContextMenu, True,
+                  TypeSystem`NestedGrid`PackagePrivate`$\
+lastContextMenuTrigger = 
+                  TypeSystem`NestedGrid`PackagePrivate`$contextMenuTrigger; 
+                 TypeSystem`NestedGrid`PackagePrivate`$lastContextMenu = 
+                  Block[{TypeSystem`NestedGrid`PackagePrivate`$\
+globalScrollPos = {TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$}}, 
+                    
+                    With[{TypeSystem`NestedGrid`PackagePrivate`lastPath$ = 
+                    TypeSystem`NestedGrid`PackagePrivate`$lastPath, 
+                    TypeSystem`NestedGrid`PackagePrivate`lastPathType$ = 
+                    TypeSystem`NestedGrid`PackagePrivate`$lastPathType, 
+                    TypeSystem`NestedGrid`PackagePrivate`isLeafHeader$ = 
+                    TypeSystem`NestedGrid`PackagePrivate`$\
+lastPathIsLeafHeader, TypeSystem`NestedGrid`PackagePrivate`headerHidden$ = And[
+                    MatchQ[TypeSystem`NestedGrid`PackagePrivate`$lastPathType, 
+                    Alternatives["RowHeader", "ColumnHeader"]], 
+                    TypeSystem`NestedGrid`PackagePrivate`headerHiddenQ[
+                    TypeSystem`NestedGrid`PackagePrivate`$lastPath, 
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$]], 
+                    TypeSystem`NestedGrid`PackagePrivate`allHidden$ = 
+                    TypeSystem`NestedGrid`PackagePrivate`allHiddenQ[
+                    TypeSystem`NestedGrid`PackagePrivate`$lastPath, 
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                    TypeSystem`NestedGrid`PackagePrivate`anyHidden$ = 
+                    TypeSystem`NestedGrid`PackagePrivate`anyHiddenQ[
+                    TypeSystem`NestedGrid`PackagePrivate`$lastPath, 
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                    TypeSystem`NestedGrid`PackagePrivate`sortDirection$ = 
+                    TypeSystem`NestedGrid`PackagePrivate`columnSortDirection[
+                    TypeSystem`NestedGrid`PackagePrivate`$lastPath, 
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$[
+                    "SortPaths"], 
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$[
+                    "SortDirections"]], 
+                    TypeSystem`NestedGrid`PackagePrivate`haveData$ = Not[
+                    FailureQ[
+                    TypeSystem`NestedGrid`PackagePrivate`datasetInitialData[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$]]], 
+                    TypeSystem`NestedGrid`PackagePrivate`isKeyDummy$ = Not[
+                    FreeQ[
+                    TypeSystem`NestedGrid`PackagePrivate`$lastPath, Keys]]}, 
+                    Join[{
+                    If[
+                    Or[
+                    Not[TypeSystem`NestedGrid`PackagePrivate`haveData$], 
+                    Not[TypeSystem`NestedGrid`PackagePrivate`anyHidden$], 
+                    TypeSystem`NestedGrid`PackagePrivate`isKeyDummy$], 
+                    Nothing, 
+                    MenuItem[
+                    "Show " <> 
+                    Which[TypeSystem`NestedGrid`PackagePrivate`lastPathType$ == 
+                    "Item", "", 
+                    TypeSystem`NestedGrid`PackagePrivate`lastPathType$ == 
+                    "RowHeader", "Row", 
+                    TypeSystem`NestedGrid`PackagePrivate`lastPathType$ == 
+                    "ColumnHeader", "Column", True, ""], 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`updateHiddenItems[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][
+                    TypeSystem`NestedGrid`PackagePrivate`lastPath$, 
+                    "remove"]], MenuEvaluator -> Automatic]], 
+                    If[
+                    Or[
+                    Not[TypeSystem`NestedGrid`PackagePrivate`haveData$], 
+                    TypeSystem`NestedGrid`PackagePrivate`pathEmptyQ[
+                    TypeSystem`NestedGrid`PackagePrivate`$lastPath, 
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                    TypeSystem`NestedGrid`PackagePrivate`isKeyDummy$, 
+                    And[
+                    TypeSystem`NestedGrid`PackagePrivate`allHidden$, 
+                    TypeSystem`NestedGrid`PackagePrivate`headerHidden$]], 
+                    Nothing, 
+                    MenuItem[
+                    "Hide " <> 
+                    Which[TypeSystem`NestedGrid`PackagePrivate`lastPathType$ == 
+                    "Item", "", 
+                    TypeSystem`NestedGrid`PackagePrivate`lastPathType$ == 
+                    "RowHeader", "Row", 
+                    TypeSystem`NestedGrid`PackagePrivate`lastPathType$ == 
+                    "ColumnHeader", "Column", True, ""], 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`updateHiddenItems[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][
+                    TypeSystem`NestedGrid`PackagePrivate`lastPath$, "add"]], 
+                    MenuEvaluator -> Automatic]], Delimiter}, 
+                    If[
+                    And[TypeSystem`NestedGrid`PackagePrivate`haveData$, 
+                    MatchQ[TypeSystem`NestedGrid`PackagePrivate`lastPathType$, 
+                    Alternatives["ColumnHeader", "KeyDummy"]], 
+                    TypeSystem`NestedGrid`PackagePrivate`isLeafHeader$, 
+                    Not[TypeSystem`NestedGrid`PackagePrivate`allHidden$]], {
+                    If[
+                    TypeSystem`NestedGrid`PackagePrivate`sortDirection$ =!= 
+                    "Ascending", 
+                    MenuItem["Sort", 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`updateSort[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][
+                    TypeSystem`NestedGrid`PackagePrivate`lastPath$, 
+                    "Ascending"]], MenuEvaluator -> Automatic], Nothing], 
+                    If[
+                    TypeSystem`NestedGrid`PackagePrivate`sortDirection$ =!= 
+                    "Descending", 
+                    MenuItem["Reverse Sort", 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`updateSort[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][
+                    TypeSystem`NestedGrid`PackagePrivate`lastPath$, 
+                    "Descending"]], MenuEvaluator -> Automatic], Nothing], 
+                    If[
+                    TypeSystem`NestedGrid`PackagePrivate`sortDirection$ =!= 
+                    None, 
+                    MenuItem["Unsort", 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`updateSort[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][
+                    TypeSystem`NestedGrid`PackagePrivate`lastPath$, None]], 
+                    MenuEvaluator -> Automatic], Nothing], Delimiter}, {}], {
+                    MenuItem["Copy Position to Clipboard", 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`toCurrentPosition[
+                    TypeSystem`NestedGrid`PackagePrivate`copyClip]], 
+                    MenuEvaluator -> Automatic], 
+                    If[TypeSystem`NestedGrid`PackagePrivate`haveData$, 
+                    MenuItem["Copy Data to Clipboard", 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`toCurrentData[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`copyClip]], 
+                    MenuEvaluator -> Automatic], Nothing], Delimiter, 
+                    MenuItem["Paste Position in New Cell", 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`toCurrentPosition[
+                    TypeSystem`NestedGrid`PackagePrivate`cellPaste]], 
+                    MenuEvaluator -> Automatic], 
+                    If[TypeSystem`NestedGrid`PackagePrivate`haveData$, 
+                    MenuItem["Paste Data in New Cell", 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`toCurrentData[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`cellPaste]], 
+                    MenuEvaluator -> Automatic], Nothing]}]]]]], FontFamily -> 
+             "Source Sans Pro", FontSize -> 14, FontWeight -> Plain}, 
+           Dividers -> All, FrameStyle -> GrayLevel[0.7490196078431373], 
+           Spacings -> {0, 0}, Alignment -> Left, 
+           BaseStyle -> {
+            FontFamily -> "Source Sans Pro", FontSize -> 14, FontWeight -> 
+             Plain}], LineBreakWithin -> False, ContextMenu -> {}, 
+          NumberMarks -> False, ShowAutoStyles -> False]], 
+       TypeSystem`NestedGrid`PackagePrivate`initialQ = True}, 
+      Dynamic[
+       TypeSystem`NestedGrid`PackagePrivate`setupViewPath[
+       TypeSystem`NestedGrid`PackagePrivate`$path$$, If[
+          Not[TypeSystem`NestedGrid`PackagePrivate`initialQ], 
+          
+          Module[{TypeSystem`NestedGrid`PackagePrivate`tmpGrid$ = $Failed, 
+            TypeSystem`NestedGrid`PackagePrivate`tmpData$ = 
+            TypeSystem`NestedGrid`PackagePrivate`datasetData[
+             TypeSystem`NestedGrid`PackagePrivate`$state$$]}, 
+           TypeSystem`NestedGrid`PackagePrivate`tmpGrid$ = If[
+              FailureQ[TypeSystem`NestedGrid`PackagePrivate`tmpData$], 
+              TypeSystem`NestedGrid`PackagePrivate`renderedGrid, 
+              TypeSystem`NestedGrid`PackagePrivate`renderGrid[
+              TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+               TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+               TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+               TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+               TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+               TypeSystem`NestedGrid`PackagePrivate`localHold[
+               TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][
+              TypeSystem`NestedGrid`PackagePrivate`tmpData$]]; If[
+             Not[
+              FailureQ[TypeSystem`NestedGrid`PackagePrivate`tmpGrid$]], 
+             TypeSystem`NestedGrid`PackagePrivate`renderedGrid = 
+             TypeSystem`NestedGrid`PackagePrivate`tmpGrid$]; Null]]; 
+        TypeSystem`NestedGrid`PackagePrivate`initialQ = False; 
+        TypeSystem`NestedGrid`PackagePrivate`$vPos$$; 
+        TypeSystem`NestedGrid`PackagePrivate`$hPos$$; If[
+          FailureQ[TypeSystem`NestedGrid`PackagePrivate`renderedGrid], 
+          TypeSystem`SparseGrid[
+           TypeSystem`H["(data no longer present)"]], 
+          TypeSystem`NestedGrid`PackagePrivate`renderedGrid]], 
+       TrackedSymbols :> {
+        TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+         TypeSystem`NestedGrid`PackagePrivate`$hPos$$}], 
+      DynamicModuleValues :> {}], 
+     TypeSystem`NestedGrid`PackagePrivate`$topBar$$ = Dynamic[
+      TypeSystem`NestedGrid`PackagePrivate`makeFramedBar[
+       TypeSystem`PackageScope`SubViewPathbar[
+       TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+        TypeSystem`NestedGrid`PackagePrivate`updateState[
+        TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+         TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+         TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+         TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+         TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+         TypeSystem`NestedGrid`PackagePrivate`localHold[
+         TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]]], 
+      TrackedSymbols :> {TypeSystem`NestedGrid`PackagePrivate`$path$$}], 
+     TypeSystem`NestedGrid`PackagePrivate`$bottomBar$$ = Style[
+      Framed[
+       Dynamic[
+        Replace[
+        TypeSystem`NestedGrid`PackagePrivate`mouseAnnotation$$, {
+         TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+            TypeSystem`NestedGrid`PackagePrivate`localHold[
+            TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][Null, 
+            Blank[]] -> "", TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+            TypeSystem`NestedGrid`PackagePrivate`localHold[
+            TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][
+            Pattern[TypeSystem`NestedGrid`PackagePrivate`path$, 
+             Blank[]], 
+            Pattern[TypeSystem`NestedGrid`PackagePrivate`pathType$, 
+             Blank[]], 
+            Pattern[TypeSystem`NestedGrid`PackagePrivate`isLeafHeader$, 
+             Blank[]]] :> (
+           Increment[
+            TypeSystem`NestedGrid`PackagePrivate`$contextMenuTrigger]; 
+           TypeSystem`NestedGrid`PackagePrivate`$lastPath = 
+            TypeSystem`NestedGrid`PackagePrivate`path$; 
+           TypeSystem`NestedGrid`PackagePrivate`$lastPathType = 
+            TypeSystem`NestedGrid`PackagePrivate`pathType$; 
+           TypeSystem`NestedGrid`PackagePrivate`$lastPathIsLeafHeader = 
+            TypeSystem`NestedGrid`PackagePrivate`isLeafHeader$; 
+           TypeSystem`NestedGrid`PackagePrivate`$lastOutputID = 
+            TypeSystem`NestedGrid`PackagePrivate`localHold[
+             TypeSystem`NestedGrid`PackagePrivate`$outputID$$]; 
+           TypeSystem`NestedGrid`PackagePrivate`makePathTrail[
+            TypeSystem`NestedGrid`PackagePrivate`path$, 
+             TypeSystem`NestedGrid`PackagePrivate`makePathElements]), Null :> 
+          Spacer[10], Blank[] :> Spacer[10]}], 
+        TrackedSymbols :> {
+         TypeSystem`NestedGrid`PackagePrivate`mouseAnnotation$$}], FrameStyle -> 
+       None, ImageMargins -> 0, FrameMargins -> 0, Alignment -> Top, 
+       ImageSize -> {Automatic, 15}], FontSize -> 1], 
+     TypeSystem`NestedGrid`PackagePrivate`mouseAnnotation$$ = Null}, 
+     DynamicWrapperBox[
+      DynamicBox[ToBoxes[
+        Dataset`DatasetContent[
+        2, "Path" -> Hold[TypeSystem`NestedGrid`PackagePrivate`$path$$], 
+         "Grid" -> Hold[TypeSystem`NestedGrid`PackagePrivate`$grid$$], 
+         "State" -> Hold[TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+         "VPos" -> Hold[TypeSystem`NestedGrid`PackagePrivate`$vPos$$], "HPos" -> 
+         Hold[TypeSystem`NestedGrid`PackagePrivate`$hPos$$], "TopBar" -> 
+         Hold[TypeSystem`NestedGrid`PackagePrivate`$topBar$$], "BottomBar" -> 
+         Hold[TypeSystem`NestedGrid`PackagePrivate`$bottomBar$$], "OutputID" -> 
+         Hold[
+           TypeSystem`NestedGrid`PackagePrivate`localHold[
+           TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]], StandardForm],
+       ImageSizeCache->{255., {168.63403309800196`, 174.36596690199804`}},
+       TrackedSymbols:>{
+        TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+         TypeSystem`NestedGrid`PackagePrivate`$grid$$}], 
+      TypeSystem`NestedGrid`PackagePrivate`mouseAnnotation$$ = 
+      MouseAnnotation[],
+      ImageSizeCache->{255., {168.63403309800196`, 174.36596690199804`}}],
+     BaseStyle->{LineBreakWithin -> False},
+     DynamicModuleValues:>{},
+     Initialization:>(TypeSystem`NestedGrid`PackagePrivate`$outputID$$ = 
+      CreateUUID[]),
+     UnsavedVariables:>{TypeSystem`NestedGrid`PackagePrivate`$outputID$$}],
+    Deploy,
+    DefaultBaseStyle->"Deploy"],
+   Dataset`InterpretDataset[1],
+   Editable->False,
+   SelectWithContents->True,
+   Selectable->False], "}"}]], "Output",
+ CellChangeTimes->{3.8720607498806515`*^9, 3.8720615171020365`*^9, 
+  3.8720615936991425`*^9, 3.872061931429549*^9, 3.87206205428588*^9},
+ CellLabel->"Out[13]=",ExpressionUUID->"f4eb6afe-13ab-4d78-adef-3a57e9194382"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"reportOptimization", "/@", "optimStates"}], "//", 
+  "Column"}]], "Input",
+ CellChangeTimes->{{3.7283248856951294`*^9, 3.728324893348567*^9}, 
+   3.7798796895339108`*^9, {3.779880112928895*^9, 3.779880114411577*^9}, {
+   3.7798802808653316`*^9, 3.7798803020420637`*^9}, 3.779881232653366*^9, 
+   3.779881316820381*^9, 3.779889365620866*^9},
+ CellLabel->"In[82]:=",ExpressionUUID->"45f73d00-ced8-47c2-9dea-b0f59656b016"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Compare reconstructed data and its maximized pure state overlap\
+\>", "Chapter",
+ CellChangeTimes->{{3.779894718126337*^9, 
+  3.779894733650815*^9}},ExpressionUUID->"1e2f965b-9008-4c54-97f0-\
+da7a13010b43"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"fidelity", "[", 
+    RowBox[{
+     RowBox[{"matrices", "[", 
+      RowBox[{"[", "#", "]"}], "]"}], ",", 
+     RowBox[{"maxOverlapStates", "[", 
+      RowBox[{"[", "#", "]"}], "]"}]}], "]"}], "&"}], "/@", 
+  RowBox[{"Range", "[", 
+   RowBox[{"Length", "[", "matrices", "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7798938151601305`*^9, 3.7798938243724885`*^9}, {
+  3.779894649100956*^9, 3.7798946629050345`*^9}},
+ CellLabel->"In[80]:=",ExpressionUUID->"9f712888-cc9e-4591-9bd4-26a7997bca97"],
+
+Cell[BoxData[
+ RowBox[{"{", "0.9468421036462368`", "}"}]], "Output",
+ CellChangeTimes->{3.8720607719772687`*^9, 3.8720615974116282`*^9},
+ CellLabel->"Out[80]=",ExpressionUUID->"4a76a5d3-42d4-43dd-b6bd-926402358212"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"fidelity", "[", 
+    RowBox[{
+     RowBox[{"maxOverlapStatesDiag", "[", 
+      RowBox[{"[", "#", "]"}], "]"}], ",", 
+     RowBox[{"maxOverlapStates", "[", 
+      RowBox[{"[", "#", "]"}], "]"}]}], "]"}], "&"}], "/@", 
+  RowBox[{"Range", "[", 
+   RowBox[{"Length", "[", "matrices", "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7798938151601305`*^9, 3.7798938243724885`*^9}, {
+  3.779894649100956*^9, 3.7798946629050345`*^9}, {3.78040236127838*^9, 
+  3.7804023660296726`*^9}},
+ CellLabel->"In[81]:=",ExpressionUUID->"dc684546-da6e-454a-ae19-4a714b8322e4"],
+
+Cell[BoxData[
+ RowBox[{"{", "0.9245177610816879`", "}"}]], "Output",
+ CellChangeTimes->{3.872060773804946*^9, 3.8720615981024895`*^9},
+ CellLabel->"Out[81]=",ExpressionUUID->"b931a58e-0991-49b7-b818-e4dff33216fd"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"assessMaxOverlap", "[", "1", "]"}]], "Input",
+ CellChangeTimes->{{3.7798935795562487`*^9, 3.779893579698868*^9}, {
+   3.7798936724079404`*^9, 3.779893673500019*^9}, 3.7798945880771728`*^9, 
+   3.7798947819666295`*^9, {3.779894827341226*^9, 3.779894828074266*^9}, 
+   3.7801373047834044`*^9, 3.7801373355648484`*^9, 3.78013743315195*^9, 
+   3.780137485498706*^9, {3.780139001371344*^9, 3.780139016995558*^9}, {
+   3.780139048723703*^9, 3.7801390778348484`*^9}, {3.780139117241458*^9, 
+   3.780139145570698*^9}, {3.7801392144435015`*^9, 3.7801392185515137`*^9}},
+ CellLabel->"In[82]:=",ExpressionUUID->"34b959a2-13af-4ec3-9296-c6f01cc8b329"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1440., 837.75},
+WindowMargins->{{-6, Automatic}, {Automatic, -6}},
+FrontEndVersion->"13.0 for Microsoft Windows (64-bit) (February 4, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"4de669b5-3f3e-41b5-9b45-762cc4ca26eb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 176, 3, 98, "Title",ExpressionUUID->"84be43b3-052b-4f92-b62f-e00e25e67516"],
+Cell[759, 27, 270, 5, 53, "Subtitle",ExpressionUUID->"246f57b9-95f7-433d-a943-5bdf398851ec"],
+Cell[CellGroupData[{
+Cell[1054, 36, 375, 6, 69, "Chapter",ExpressionUUID->"b7eecaa5-0bcc-447b-9a79-eaf029ad0cc4"],
+Cell[CellGroupData[{
+Cell[1454, 46, 1320, 28, 86, "Input",ExpressionUUID->"6d343e18-926a-4339-962e-ce3fb147ee8a"],
+Cell[2777, 76, 454, 6, 32, "Output",ExpressionUUID->"5a22f449-e25c-4962-88cd-bc1bf1ea92c8"],
+Cell[3234, 84, 1305, 29, 35, "Output",ExpressionUUID->"75be414d-54ed-4ab0-b489-88ad989c977c"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4588, 119, 159, 3, 69, "Chapter",ExpressionUUID->"09623919-107c-4890-9de4-edaf4451acb0"],
+Cell[CellGroupData[{
+Cell[4772, 126, 152, 3, 64, "Subchapter",ExpressionUUID->"c5dc5782-0953-4920-81d4-01a12c19943f"],
+Cell[4927, 131, 187, 3, 35, "Text",ExpressionUUID->"34d56842-2295-4e20-a3b2-51609ea95cb7"],
+Cell[5117, 136, 509, 12, 48, "Input",ExpressionUUID->"c71f8d76-c49d-42c5-8b4d-c8aaec55780d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5663, 153, 182, 3, 64, "Subchapter",ExpressionUUID->"4312de00-139e-4ec0-bd8d-d5d3a78e6e02"],
+Cell[5848, 158, 233, 6, 35, "Text",ExpressionUUID->"57f06eb5-f350-4643-969b-6c9cc28ed01f"],
+Cell[6084, 166, 481, 10, 48, "Input",ExpressionUUID->"4edf0896-3bd2-467c-87d6-0309c13ec98a"],
+Cell[6568, 178, 679, 13, 48, "Input",ExpressionUUID->"77cfe278-9e24-4eed-98d5-4ad9b586f052"],
+Cell[7250, 193, 294, 7, 28, "Input",ExpressionUUID->"1591aedf-af38-4ef5-90a7-50f952b93290"],
+Cell[7547, 202, 302, 7, 28, "Input",ExpressionUUID->"8c2a92f5-9325-49f7-86e1-f241c10af830"],
+Cell[7852, 211, 277, 6, 28, "Input",ExpressionUUID->"11a75a87-d9de-4fe1-84c2-f9deb5ae7e3f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8166, 222, 167, 3, 64, "Subchapter",ExpressionUUID->"f829221f-4878-40d1-91c3-4a7d82e3f6c8"],
+Cell[8336, 227, 223, 5, 35, "Text",ExpressionUUID->"97220565-8f8e-4597-9550-bac16a142ea9"],
+Cell[8562, 234, 1890, 47, 143, "Input",ExpressionUUID->"06e7b001-7caa-478e-8f11-8743c2842bcb"],
+Cell[10455, 283, 160, 3, 35, "Text",ExpressionUUID->"98f4b28f-0988-46d0-8cc4-5320367eac62"],
+Cell[10618, 288, 1340, 35, 124, "Input",ExpressionUUID->"8cebdc68-ab28-492e-97a2-3ed31122f160"],
+Cell[11961, 325, 184, 4, 28, "Input",ExpressionUUID->"2e2db30a-1919-45e6-b0ac-4391dc1ec071"]
+}, Closed]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12194, 335, 160, 3, 69, "Chapter",ExpressionUUID->"ab4af0ee-3653-4e51-a192-4ffab2db5583"],
+Cell[CellGroupData[{
+Cell[12379, 342, 355, 6, 28, "Input",ExpressionUUID->"73577c6d-9d63-4af9-a150-990242108ab1"],
+Cell[12737, 350, 1366, 38, 65, "Output",ExpressionUUID->"055ccb18-7ca8-4d41-83a7-57cc605ef1ab"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14140, 393, 407, 6, 28, "Input",ExpressionUUID->"4cd9afc0-05c2-4bc6-8447-2cd5dcfe7fbd"],
+Cell[14550, 401, 1349, 38, 65, "Output",ExpressionUUID->"56d0db51-699f-4f59-acf3-fe35f2927c49"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15936, 444, 212, 3, 28, "Input",ExpressionUUID->"007fe7f5-9977-41cc-a906-101cd0aa007a"],
+Cell[16151, 449, 51795, 902, 362, "Output",ExpressionUUID->"f4eb6afe-13ab-4d78-adef-3a57e9194382"]
+}, Open  ]],
+Cell[67961, 1354, 454, 8, 28, "Input",ExpressionUUID->"45f73d00-ced8-47c2-9dea-b0f59656b016"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[68452, 1367, 216, 5, 69, "Chapter",ExpressionUUID->"1e2f965b-9008-4c54-97f0-da7a13010b43"],
+Cell[CellGroupData[{
+Cell[68693, 1376, 540, 13, 28, "Input",ExpressionUUID->"9f712888-cc9e-4591-9bd4-26a7997bca97"],
+Cell[69236, 1391, 215, 3, 32, "Output",ExpressionUUID->"4a76a5d3-42d4-43dd-b6bd-926402358212"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[69488, 1399, 602, 14, 28, "Input",ExpressionUUID->"dc684546-da6e-454a-ae19-4a714b8322e4"],
+Cell[70093, 1415, 213, 3, 32, "Output",ExpressionUUID->"b931a58e-0991-49b7-b818-e4dff33216fd"]
+}, Open  ]],
+Cell[70321, 1421, 663, 9, 28, "Input",ExpressionUUID->"34b959a2-13af-4ec3-9296-c6f01cc8b329"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

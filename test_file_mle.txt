@@ -1,0 +1,1173 @@
+Density submatrix topography and fidelity with reference state																				
+=========================================																				
+																				
+description:																				
+date:	Friday, April 06, 2018																			
+time:	3:49:19 PM																			
+ 																				
+==== SLM 1 ====																				
+---- Beam specification ----																				
+horizontal pos. (in pixels):	1091.232046																			
+vertical pos. (in pixels):	504.095715																			
+beam radius (in meters):	0.001389																			
+ 																				
+---- Grating specification ----																				
+pitch (in pixels):	-9.998750																			
+angle (in degrees):	90.000000																			
+offset (in pixels):	0.000000																			
+  																				
+==== SLM 2 ====																				
+---- Beam specification ----																				
+horizontal pos. (in pixels):	844.843810																			
+vertical pos. (in pixels):	562.971355																			
+beam radius (in meters):	0.001277																			
+ 																				
+---- Grating specification ----																				
+pitch (in pixels):	-9.986000																			
+angle (in degrees):	90.000000																			
+offset (in pixels):	0.000000																			
+  																				
+==== CCLogic ====																				
+acquisition time step (in seconds):	1.000000																			
+																				
+==== Reference and measured density submatrix  ====																				
+																				
+---- Reference state ----																				
+ +0.333 |0 0> +0.333 |0 2> +0.333 |0 -2> +0.333 |2 0> +0.333 |2 2> +0.333 |2 -2> +0.333 |-2 0> +0.333 |-2 2> +0.333 |-2 -2>																				
+																				
+--- Real reference matrix ----											--- Imag reference matrix ----									
+	|   0,   0>   	|   0,   2>   	|   0,  -2>   	|   2,   0>   	|   2,   2>   	|   2,  -2>   	|  -2,   0>   	|  -2,   2>   	|  -2,  -2>   			|   0,   0>   	|   0,   2>   	|   0,  -2>   	|   2,   0>   	|   2,   2>   	|   2,  -2>   	|  -2,   0>   	|  -2,   2>   	|  -2,  -2>   
+|   0,   0>   	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111		|   0,   0>   	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+|   0,   2>   	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111		|   0,   2>   	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+|   0,  -2>   	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111		|   0,  -2>   	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+|   2,   0>   	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111		|   2,   0>   	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+|   2,   2>   	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111		|   2,   2>   	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+|   2,  -2>   	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111		|   2,  -2>   	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+|  -2,   0>   	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111		|  -2,   0>   	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+|  -2,   2>   	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111		|  -2,   2>   	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+|  -2,  -2>   	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111	0.111111		|  -2,  -2>   	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+																				
+---- Fidelity between reference and measured state ----																				
+0.332591																				
+																				
+---- Measured state ----																				
+																				
+--- Real measured matrix ----											--- Imag measured matrix ----									
+	|   0,   0>   	|   0,   2>   	|   0,  -2>   	|   2,   0>   	|   2,   2>   	|   2,  -2>   	|  -2,   0>   	|  -2,   2>   	|  -2,  -2>   			|   0,   0>   	|   0,   2>   	|   0,  -2>   	|   2,   0>   	|   2,   2>   	|   2,  -2>   	|  -2,   0>   	|  -2,   2>   	|  -2,  -2>   
+|   0,   0>   	0.257922	-0.002560	0.023419	0.030377	0.005059	0.272099	0.003670	0.272147	-0.000727		|   0,   0>   	0.000000	0.044339	0.077021	0.077411	0.008851	0.045180	0.027952	-0.038253	0.005781
+|   0,   2>   	-0.002560	0.006632	0.010641	-0.059791	0.000520	-0.009453	0.012774	0.001069	-0.003927		|   0,   2>   	-0.044339	0.000000	0.000000	-0.020988	-0.003158	-0.071566	0.011394	-0.070322	0.002745
+|   0,  -2>   	0.023419	0.010641	0.021371	0.027087	-0.010489	0.032870	-0.065189	0.005974	0.000000		|   0,  -2>   	-0.077021	0.000000	0.000000	-0.008553	0.015514	-0.083430	0.002097	-0.094643	-0.006914
+|   2,   0>   	0.030377	-0.059791	0.027087	0.024318	-0.004010	0.039046	0.008651	0.032099	0.009545		|   2,   0>   	-0.077411	0.020988	0.008553	0.000000	-0.009414	-0.113377	0.006632	-0.102327	0.011379
+|   2,   2>   	0.005059	0.000520	-0.010489	-0.004010	0.002211	0.010699	-0.001372	0.017129	0.002892		|   2,   2>   	-0.008851	0.003158	-0.015514	0.009414	0.000000	0.009967	-0.004670	-0.004354	-0.005211
+|   2,  -2>   	0.272099	-0.009453	0.032870	0.039046	0.010699	0.352985	-0.007101	0.324223	0.007843		|   2,  -2>   	-0.045180	0.071566	0.083430	0.113377	-0.009967	0.000000	0.069117	-0.039615	-0.003935
+|  -2,   0>   	0.003670	0.012774	-0.065189	0.008651	-0.001372	-0.007101	0.015475	-0.007357	-0.000790		|  -2,   0>   	-0.027952	-0.011394	-0.002097	-0.006632	0.004670	-0.069117	0.000000	-0.073422	-0.006965
+|  -2,   2>   	0.272147	0.001069	0.005974	0.032099	0.017129	0.324223	-0.007357	0.316139	0.019593		|  -2,   2>   	0.038253	0.070322	0.094643	0.102327	0.004354	0.039615	0.073422	0.000000	-0.011633
+|  -2,  -2>   	-0.000727	-0.003927	0.000000	0.009545	0.002892	0.007843	-0.000790	0.019593	0.002948		|  -2,  -2>   	-0.005781	-0.002745	0.006914	-0.011379	0.005211	0.003935	0.006965	0.011633	0.000000
+																				
+--- Abs val measured matrix ----																				
+	|   0,   0>   	|   0,   2>   	|   0,  -2>   	|   2,   0>   	|   2,   2>   	|   2,  -2>   	|  -2,   0>   	|  -2,   2>   	|  -2,  -2>   											
+|   0,   0>   	0.257922	0.044413	0.080503	0.083158	0.010195	0.275825	0.028192	0.274822	0.005826											
+|   0,   2>   	0.044413	0.006632	0.010641	0.063368	0.003201	0.072188	0.017117	0.070330	0.004791											
+|   0,  -2>   	0.080503	0.010641	0.021371	0.028405	0.018727	0.089672	0.065223	0.094831	0.006914											
+|   2,   0>   	0.083158	0.063368	0.028405	0.024318	0.010232	0.119912	0.010901	0.107243	0.014853											
+|   2,   2>   	0.010195	0.003201	0.018727	0.010232	0.002211	0.014622	0.004867	0.017674	0.005960											
+|   2,  -2>   	0.275825	0.072188	0.089672	0.119912	0.014622	0.352985	0.069480	0.326635	0.008775											
+|  -2,   0>   	0.028192	0.017117	0.065223	0.010901	0.004867	0.069480	0.015475	0.073789	0.007009											
+|  -2,   2>   	0.274822	0.070330	0.094831	0.107243	0.017674	0.326635	0.073789	0.316139	0.022786											
+|  -2,  -2>   	0.005826	0.004791	0.006914	0.014853	0.005960	0.008775	0.007009	0.022786	0.002948											
+																				
+==== Diagonal elements ====																				
+																				
+	Singles 1      	Singles 2      	Coincidences      																	
+<   0,   0|state|   0,   0>	26180	17038	350																	
+<   0,   2|state|   0,   2>	26181	13522	9																	
+<   0,  -2|state|   0,  -2>	26668	14618	29																	
+<   2,   0|state|   2,   0>	23538	16914	33																	
+<   2,   2|state|   2,   2>	23443	13804	3																	
+<   2,  -2|state|   2,  -2>	23849	14804	479																	
+<  -2,   0|state|  -2,   0>	24141	17126	21																	
+<  -2,   2|state|  -2,   2>	24294	13620	429																	
+<  -2,  -2|state|  -2,  -2>	24359	14996	4																	
+																				
+==== Off-diagonal elements ====																				
+																				
+---- <  -2,    2|state |  -2,   -2> ---- SLM 1: (  -2,   -2); SLM 2: (   2,   -2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	49009	23407	342																	
+PP:	24284	12298	192																	
+PM:	24725	11109	150																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	49167	24453	384																	
+PR:	24522	12785	178																	
+PL:	24645	11668	206																	
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RP:																				
+RM:																				
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
+---- <  -2,    0|state |  -2,   -2> ---- SLM 1: (  -2,   -2); SLM 2: (   0,   -2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	48933	39856	35																	
+PP:	24509	20747	16																	
+PM:	24424	19109	19																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	48716	39211	41																	
+PR:	24229	18445	5																	
+PL:	24487	20766	36																	
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RP:																				
+RM:																				
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
+---- <  -2,    0|state |  -2,    2> ---- SLM 1: (  -2,   -2); SLM 2: (   0,    2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	48690	38701	293																	
+PP:	24369	19948	140																	
+PM:	24321	18753	153																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	49037	38972	341																	
+PR:	24689	20092	95																	
+PL:	24348	18880	246																	
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RP:																				
+RM:																				
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
+---- <   2,   -2|state |  -2,   -2> ---- SLM 1: (   2,   -2); SLM 2: (  -2,   -2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	42863	29114	295																	
+PP:	21319	14457	154																	
+PM:	21544	14657	141																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+PR:																				
+PL:																				
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	42706	29306	407																	
+RP:	21152	14551	199																	
+RM:	21554	14755	208																	
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
+---- <   2,   -2|state |  -2,    2> ---- SLM 1: (   2,   -2); SLM 2: (  -2,    2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	84940	46354	530																	
+PP:	21399	12118	286																	
+PM:	21141	10945	3																	
+MP:	21106	12245	5																	
+MM:	21294	11046	236																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	85810	48595	586																	
+PR:	21667	11617	137																	
+PL:	21335	12714	178																	
+MR:	21302	11603	155																	
+ML:	21506	12661	116																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	86625	46518	528																	
+RP:	21237	12244	135																	
+RM:	21582	10898	144																	
+LP:	21926	12473	146																	
+LM:	21880	10903	103																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	85890	48189	646																	
+RR:	21360	11336	10																	
+RL:	21308	12663	315																	
+LR:	21686	11446	316																	
+LL:	21536	12744	5																	
+																				
+																				
+---- <   2,   -2|state |  -2,    0> ---- SLM 1: (   2,   -2); SLM 2: (  -2,    0) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	85094	78860	354																	
+PP:	21283	20255	90																	
+PM:	21222	19321	59																	
+MP:	21385	20239	115																	
+MM:	21204	19045	90																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	85742	77289	365																	
+PR:	21704	20362	214																	
+PL:	21620	18266	48																	
+MR:	21227	20480	80																	
+ML:	21191	18181	23																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	86279	79002	380																	
+RP:	21533	20305	152																	
+RM:	21378	19006	52																	
+LP:	21772	20418	62																	
+LM:	21596	19273	114																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	86082	77298	417																	
+RR:	21500	20197	191																	
+RL:	21273	18350	49																	
+LR:	21750	20500	141																	
+LL:	21559	18251	36																	
+																				
+																				
+---- <   2,    2|state |  -2,   -2> ---- SLM 1: (   2,   -2); SLM 2: (   2,   -2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	85640	46626	491																	
+PP:	21017	12142	257																	
+PM:	21579	11193	5																	
+MP:	21525	12370	7																	
+MM:	21519	10921	222																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	85440	48061	582																	
+PR:	21382	12738	160																	
+PL:	21359	11445	157																	
+MR:	21275	12617	126																	
+ML:	21424	11261	139																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	85686	46646	565																	
+RP:	21444	12163	170																	
+RM:	21285	11282	159																	
+LP:	21503	12105	140																	
+LM:	21454	11096	96																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	85998	48442	636																	
+RR:	21388	12732	311																	
+RL:	21347	11182	11																	
+LR:	21598	12952	10																	
+LL:	21665	11576	304																	
+																				
+																				
+---- <   2,    2|state |  -2,    2> ---- SLM 1: (   2,   -2); SLM 2: (   2,    2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	43105	27234	381																	
+PP:	21575	13559	211																	
+PM:	21530	13675	170																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+PR:																				
+PL:																				
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	43022	27339	329																	
+RP:	21556	13641	160																	
+RM:	21466	13698	169																	
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
+---- <   2,    2|state |  -2,    0> ---- SLM 1: (   2,   -2); SLM 2: (   2,    0) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	85694	76793	297																	
+PP:	21358	19886	67																	
+PM:	21339	18482	50																	
+MP:	21459	20003	82																	
+MM:	21538	18422	98																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	85766	76008	333																	
+PR:	21510	18497	214																	
+PL:	21304	19245	37																	
+MR:	21492	18686	31																	
+ML:	21460	19580	51																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	86339	77665	320																	
+RP:	21667	20011	31																	
+RM:	21371	18640	155																	
+LP:	21501	20296	108																	
+LM:	21800	18718	26																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	86307	75353	348																	
+RR:	21201	18452	144																	
+RL:	21415	19131	25																	
+LR:	21771	18223	127																	
+LL:	21920	19547	52																	
+																				
+																				
+---- <   2,    2|state |   2,   -2> ---- SLM 1: (   2,    2); SLM 2: (   2,   -2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	47801	23428	332																	
+PP:	23827	12253	176																	
+PM:	23974	11175	156																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	47999	24412	392																	
+PR:	23835	12787	207																	
+PL:	24164	11625	185																	
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RP:																				
+RM:																				
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
+---- <   2,    0|state |  -2,   -2> ---- SLM 1: (   2,   -2); SLM 2: (   0,   -2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	85327	79549	296																	
+PP:	21345	20425	89																	
+PM:	21230	19302	51																	
+MP:	21473	20472	100																	
+MM:	21279	19350	56																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	85452	79203	326																	
+PR:	21498	18709	51																	
+PL:	21594	20975	207																	
+MR:	21249	18608	23																	
+ML:	21111	20911	45																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	85815	79216	422																	
+RP:	21282	20462	190																	
+RM:	21244	19041	42																	
+LP:	21574	20071	58																	
+LM:	21715	19642	132																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	86236	78944	394																	
+RR:	21418	18438	45																	
+RL:	21501	20845	165																	
+LR:	21483	18802	55																	
+LL:	21834	20859	129																	
+																				
+																				
+---- <   2,    0|state |  -2,    2> ---- SLM 1: (   2,   -2); SLM 2: (   0,    2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	85012	77420	295																	
+PP:	21215	20243	83																	
+PM:	21453	18632	43																	
+MP:	21170	20092	79																	
+MM:	21174	18453	90																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	85379	78021	325																	
+PR:	21309	20204	32																	
+PL:	21441	18863	185																	
+MR:	21341	20109	75																	
+ML:	21288	18845	33																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	86012	77506	280																	
+RP:	21299	20095	36																	
+RM:	21211	18674	119																	
+LP:	21675	20029	97																	
+LM:	21827	18708	28																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	86547	78269	334																	
+RR:	21382	20000	33																	
+RL:	21508	19024	141																	
+LR:	21785	20377	57																	
+LL:	21872	18868	103																	
+																				
+																				
+---- <   2,    0|state |  -2,    0> ---- SLM 1: (   2,   -2); SLM 2: (   0,    0) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	42681	34254	46																	
+PP:	21294	17250	33																	
+PM:	21387	17004	13																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+PR:																				
+PL:																				
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	42660	34374	42																	
+RP:	21210	17170	28																	
+RM:	21450	17204	14																	
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
+---- <   2,    0|state |   2,   -2> ---- SLM 1: (   2,    2); SLM 2: (   0,   -2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	47583	40013	459																	
+PP:	23704	20791	277																	
+PM:	23879	19222	182																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	47763	39409	406																	
+PR:	23782	18572	81																	
+PL:	23981	20837	325																	
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RP:																				
+RM:																				
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
+---- <   2,    0|state |   2,    2> ---- SLM 1: (   2,    2); SLM 2: (   0,    2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	48239	39239	43																	
+PP:	24075	20380	15																	
+PM:	24164	18859	28																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	47615	39372	62																	
+PR:	23833	20285	9																	
+PL:	23782	19087	53																	
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RP:																				
+RM:																				
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
+---- <   0,   -2|state |  -2,   -2> ---- SLM 1: (   0,   -2); SLM 2: (  -2,   -2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	58768	29420	46																	
+PP:	30051	14880	23																	
+PM:	28717	14540	23																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+PR:																				
+PL:																				
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	60169	29743	51																	
+RP:	29527	14834	11																	
+RM:	30642	14909	40																	
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
+---- <   0,   -2|state |  -2,    2> ---- SLM 1: (   0,   -2); SLM 2: (  -2,    2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	117639	46605	255																	
+PP:	30117	12252	51																	
+PM:	29904	11074	78																	
+MP:	28910	12369	53																	
+MM:	28708	10910	73																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	116897	47961	295																	
+PR:	30106	11402	42																	
+PL:	30076	12393	133																	
+MR:	28399	11519	97																	
+ML:	28316	12647	23																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	120453	46422	239																	
+RP:	29481	12154	25																	
+RM:	29486	11002	40																	
+LP:	31098	12256	143																	
+LM:	30388	11010	31																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	119701	48520	270																	
+RR:	29087	11636	27																	
+RL:	29322	12751	44																	
+LR:	30398	11574	104																	
+LL:	30894	12559	95																	
+																				
+																				
+---- <   0,   -2|state |  -2,    0> ---- SLM 1: (   0,   -2); SLM 2: (  -2,    0) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	117412	78919	277																	
+PP:	30229	20201	49																	
+PM:	30181	19308	109																	
+MP:	28636	20142	94																	
+MM:	28366	19268	25																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	117589	77317	318																	
+PR:	30123	20565	27																	
+PL:	30203	18079	132																	
+MR:	28743	20472	29																	
+ML:	28520	18201	130																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	119771	78474	319																	
+RP:	29452	20051	137																	
+RM:	29213	19489	87																	
+LP:	30692	19720	66																	
+LM:	30414	19214	29																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	119417	76714	512																	
+RR:	28996	20211	145																	
+RL:	28906	17800	148																	
+LR:	30855	20319	3																	
+LL:	30660	18384	216																	
+																				
+																				
+---- <   0,   -2|state |   2,   -2> ---- SLM 1: (   0,    2); SLM 2: (  -2,   -2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	59841	29453	410																	
+PP:	31127	14634	241																	
+PM:	28714	14819	169																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+PR:																				
+PL:																				
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	59653	29494	433																	
+RP:	29510	14769	120																	
+RM:	30143	14725	313																	
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
+---- <   0,   -2|state |   2,    2> ---- SLM 1: (   0,    2); SLM 2: (  -2,    2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118974	46536	331																	
+PP:	30710	12188	70																	
+PM:	31120	10976	122																	
+MP:	28569	12277	51																	
+MM:	28575	11095	88																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118218	48636	345																	
+PR:	30706	11673	140																	
+PL:	30709	12689	49																	
+MR:	28294	11577	42																	
+ML:	28509	12697	114																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118686	46486	380																	
+RP:	29648	12397	66																	
+RM:	29273	10973	25																	
+LP:	29936	12203	224																	
+LM:	29829	10913	65																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118950	47990	374																	
+RR:	29453	11441	48																	
+RL:	29498	12423	37																	
+LR:	29810	11629	138																	
+LL:	30189	12497	151																	
+																				
+																				
+---- <   0,   -2|state |   2,    0> ---- SLM 1: (   0,    2); SLM 2: (  -2,    0) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118270	79429	575																	
+PP:	30838	20410	316																	
+PM:	30588	19153	11																	
+MP:	28538	20660	13																	
+MM:	28306	19206	235																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118258	76810	667																	
+PR:	30379	20361	218																	
+PL:	30829	17963	158																	
+MR:	28291	20163	172																	
+ML:	28759	18323	119																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	117878	79185	623																	
+RP:	29210	20389	177																	
+RM:	29053	19286	161																	
+LP:	29825	20375	170																	
+LM:	29790	19135	115																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	117488	76781	829																	
+RR:	29270	20254	390																	
+RL:	28861	18123	40																	
+LR:	29767	20279	63																	
+LL:	29590	18125	336																	
+																				
+																				
+---- <   0,    2|state |  -2,   -2> ---- SLM 1: (   0,   -2); SLM 2: (   2,   -2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	117844	46135	257																	
+PP:	30274	12195	53																	
+PM:	30338	10993	85																	
+MP:	28591	12108	52																	
+MM:	28641	10839	67																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118029	47846	291																	
+PR:	30425	12963	105																	
+PL:	30138	11283	39																	
+MR:	28596	12507	23																	
+ML:	28870	11093	124																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	120110	46208	284																	
+RP:	29580	12156	29																	
+RM:	29432	11079	54																	
+LP:	30797	12184	165																	
+LM:	30301	10789	36																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	120459	47859	335																	
+RR:	29351	12704	50																	
+RL:	29347	11251	31																	
+LR:	30726	12682	140																	
+LL:	31035	11222	114																	
+																				
+																				
+---- <   0,    2|state |  -2,    2> ---- SLM 1: (   0,   -2); SLM 2: (   2,    2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	59026	27712	302																	
+PP:	30396	13795	152																	
+PM:	28630	13917	150																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+PR:																				
+PL:																				
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	60406	27603	319																	
+RP:	29431	13568	90																	
+RM:	30975	14035	229																	
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
+---- <   0,    2|state |  -2,    0> ---- SLM 1: (   0,   -2); SLM 2: (   2,    0) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	117742	77478	496																	
+PP:	30175	19995	211																	
+PM:	30270	18546	7																	
+MP:	28797	20284	3																	
+MM:	28500	18653	275																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	117775	76895	559																	
+PR:	29949	18819	136																	
+PL:	30198	19686	115																	
+MR:	28809	18578	126																	
+ML:	28819	19812	182																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	120305	77891	571																	
+RP:	29548	20374	141																	
+RM:	29286	18785	161																	
+LP:	30675	20035	142																	
+LM:	30796	18697	127																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	119695	76141	730																	
+RR:	29205	18236	332																	
+RL:	29193	19993	30																	
+LR:	30583	18437	16																	
+LL:	30714	19475	352																	
+																				
+																				
+---- <   0,    2|state |   2,   -2> ---- SLM 1: (   0,    2); SLM 2: (   2,   -2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118562	46549	338																	
+PP:	30546	12285	70																	
+PM:	30858	10938	129																	
+MP:	28385	12240	58																	
+MM:	28773	11086	81																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	119084	48398	363																	
+PR:	30905	12863	51																	
+PL:	31020	11326	138																	
+MR:	28222	12778	115																	
+ML:	28937	11431	59																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118985	46722	371																	
+RP:	29511	12302	63																	
+RM:	29533	11106	36																	
+LP:	30145	12099	215																	
+LM:	29796	11215	57																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118989	47896	383																	
+RR:	29156	12696	40																	
+RL:	29242	11151	52																	
+LR:	30277	12530	141																	
+LL:	30314	11519	150																	
+																				
+																				
+---- <   0,    2|state |   2,    2> ---- SLM 1: (   0,    2); SLM 2: (   2,    2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	59748	27173	34																	
+PP:	30789	13776	19																	
+PM:	28959	13397	15																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+PR:																				
+PL:																				
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	58999	27622	35																	
+RP:	29171	13729	5																	
+RM:	29828	13893	30																	
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
+---- <   0,    2|state |   2,    0> ---- SLM 1: (   0,    2); SLM 2: (   2,    0) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118232	77400	349																	
+PP:	30564	20058	73																	
+PM:	30754	18787	121																	
+MP:	28491	20314	111																	
+MM:	28423	18241	44																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118234	76229	394																	
+PR:	30311	18476	66																	
+PL:	30482	19731	173																	
+MR:	28977	18341	63																	
+ML:	28464	19681	92																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118163	77368	387																	
+RP:	29224	19931	150																	
+RM:	29228	18901	183																	
+LP:	29867	20104	28																	
+LM:	29844	18432	26																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118463	76814	508																	
+RR:	29062	18397	238																	
+RL:	29606	19929	124																	
+LR:	29830	18666	5																	
+LL:	29965	19822	141																	
+																				
+																				
+---- <   0,    2|state |   0,   -2> ---- SLM 1: (   0,    0); SLM 2: (   2,   -2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	53029	23355	25																	
+PP:	26517	12291	22																	
+PM:	26512	11064	3																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	53135	24240	38																	
+PR:	26643	12725	19																	
+PL:	26492	11515	19																	
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RP:																				
+RM:																				
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
+---- <   0,    0|state |  -2,   -2> ---- SLM 1: (   0,   -2); SLM 2: (   0,   -2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	117899	79252	267																	
+PP:	30515	20317	40																	
+PM:	30209	19400	101																	
+MP:	28419	20558	94																	
+MM:	28756	18977	32																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118061	78806	318																	
+PR:	30199	18197	114																	
+PL:	30099	20902	30																	
+MR:	29068	18820	145																	
+ML:	28695	20887	29																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	120967	79210	387																	
+RP:	29722	20245	156																	
+RM:	29302	19129	108																	
+LP:	31134	20553	51																	
+LM:	30809	19283	72																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	119875	78953	499																	
+RR:	29052	18929	131																	
+RL:	29178	20882	145																	
+LR:	30951	18484	217																	
+LL:	30694	20658	6																	
+																				
+																				
+---- <   0,    0|state |  -2,    2> ---- SLM 1: (   0,   -2); SLM 2: (   0,    2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118250	78075	488																	
+PP:	30129	20134	231																	
+PM:	30468	18698	6																	
+MP:	28717	20253	5																	
+MM:	28936	18990	246																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118410	78354	569																	
+PR:	30150	20359	118																	
+PL:	30084	18746	162																	
+MR:	28936	20170	164																	
+ML:	29240	19079	125																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	120563	78127	686																	
+RP:	29412	20367	169																	
+RM:	29386	19036	197																	
+LP:	30778	20011	184																	
+LM:	30987	18713	136																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	120236	77918	729																	
+RR:	29545	20434	33																	
+RL:	29266	18830	328																	
+LR:	30642	20074	354																	
+LL:	30783	18580	14																	
+																				
+																				
+---- <   0,    0|state |  -2,    0> ---- SLM 1: (   0,   -2); SLM 2: (   0,    0) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	59053	34273	298																	
+PP:	30334	17091	153																	
+PM:	28719	17182	145																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+PR:																				
+PL:																				
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	60023	34530	357																	
+RP:	29386	17413	215																	
+RM:	30637	17117	142																	
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
+---- <   0,    0|state |   2,   -2> ---- SLM 1: (   0,    2); SLM 2: (   0,   -2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	119388	78515	591																	
+PP:	30959	20327	333																	
+PM:	30559	19111	11																	
+MP:	28943	20091	15																	
+MM:	28927	18986	232																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	119200	79020	729																	
+PR:	31124	18713	236																	
+PL:	30838	20757	154																	
+MR:	28718	18685	114																	
+ML:	28520	20865	225																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118329	79494	667																	
+RP:	29139	20437	197																	
+RM:	29212	19341	160																	
+LP:	30035	20631	170																	
+LM:	29943	19085	140																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118810	78636	857																	
+RR:	29198	18376	58																	
+RL:	29330	20783	414																	
+LR:	30278	18505	334																	
+LL:	30004	20972	51																	
+																				
+																				
+---- <   0,    0|state |   2,    2> ---- SLM 1: (   0,    2); SLM 2: (   0,    2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118827	77993	321																	
+PP:	30761	20123	52																	
+PM:	30763	18631	120																	
+MP:	28683	20314	97																	
+MM:	28620	18925	52																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	119244	79175	355																	
+PR:	30984	20676	156																	
+PL:	30812	19074	57																	
+MR:	28518	20459	96																	
+ML:	28930	18966	46																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118636	77668	427																	
+RP:	29439	20094	172																	
+RM:	29283	18708	176																	
+LP:	29821	20191	41																	
+LM:	30093	18675	38																	
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	118456	78846	529																	
+RR:	29448	20360	145																	
+RL:	29585	18954	255																	
+LR:	29570	20560	121																	
+LL:	29853	18972	8																	
+																				
+																				
+---- <   0,    0|state |   2,    0> ---- SLM 1: (   0,    2); SLM 2: (   0,    0) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	59090	34569	367																	
+PP:	30600	17352	223																	
+PM:	28490	17217	144																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+PR:																				
+PL:																				
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	59486	34361	412																	
+RP:	29610	17178	319																	
+RM:	29876	17183	93																	
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
+---- <   0,    0|state |   0,   -2> ---- SLM 1: (   0,    0); SLM 2: (   0,   -2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	52372	39625	322																	
+PP:	26025	20715	188																	
+PM:	26347	18910	134																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	53705	39940	388																	
+PR:	27072	19316	301																	
+PL:	26633	20624	87																	
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RP:																				
+RM:																				
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
+---- <   0,    0|state |   0,    2> ---- SLM 1: (   0,    0); SLM 2: (   0,    2) ----																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	53590	38536	310																	
+PP:	26963	19905	152																	
+PM:	26627	18631	158																	
+MP:																				
+MM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	53370	39293	358																	
+PR:	26702	20245	239																	
+PL:	26668	19048	119																	
+MR:																				
+ML:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RP:																				
+RM:																				
+LP:																				
+LM:																				
+																				
+	Singles 1	Singles 2	Coincidences																	
+Sum:	0	0	0																	
+RR:																				
+RL:																				
+LR:																				
+LL:																				
+																				
+																				
